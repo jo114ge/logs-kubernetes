@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gitea-runner
+  namespace: gitea
+  labels:
+    app: gitea-runner
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gitea-runner
+  template:
+    metadata:
+      labels:
+        app: gitea-runner
+    spec:
+      containers:
+      - name: runner
+        image: gitea/act_runner:latest
+        env:
+        - name: GITEA_INSTANCE_URL
+          value: "http://gitea-http:3000"
+        - name: GITEA_RUNNER_REGISTRATION_TOKEN
+          value: "It3KwWlk6QoL9jhYqjLkD4gVbEbqM8QgomgNP4jF"
+        - name: GITEA_RUNNER_NAME
+          value: "k8s-runner"
+        - name: GITEA_RUNNER_LABELS
+          value: "ubuntu-latest,ubuntu-22.04"
+        volumeMounts:
+        - name: docker-sock
+          mountPath: /var/run/docker.sock
+        - name: runner-data
+          mountPath: /data
+        securityContext:
+          privileged: true
+      volumes:
+      - name: docker-sock
+        hostPath:
+          path: /var/run/docker.sock
+      - name: runner-data
+        emptyDir: {}
+      restartPolicy: Always

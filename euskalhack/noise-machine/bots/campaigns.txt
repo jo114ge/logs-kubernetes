@@ -1,0 +1,154 @@
+MALICIOUS GITEA BOT CAMPAIGNS
+=============================
+
+1. STEALTH CAMPAIGN
+-------------------
+Objective: Minimal detection, long-term persistence
+Repositories: 2 
+Commits per repo: 2
+Backdoors: 1 per repo
+Delay between actions: 5 seconds
+Strategy: Creates few repositories with legitimate names, injects minimal malicious code mixed with real functionality. Uses long delays to avoid detection by rate limiting systems.
+Target: High-value systems where stealth is critical
+Detection risk: LOW
+
+2. STANDARD CAMPAIGN
+--------------------
+Objective: Balanced approach between impact and stealth
+Repositories: 3
+Commits per repo: 4
+Backdoors: 2 per repo
+Delay between actions: 2 seconds
+Strategy: Moderate repository creation with mixed legitimate and malicious commits. Establishes multiple backdoors for redundancy.
+Target: General purpose compromise
+Detection risk: MEDIUM
+
+3. AGGRESSIVE CAMPAIGN
+----------------------
+Objective: Maximum immediate impact
+Repositories: 5
+Commits per repo: 6
+Backdoors: 3 per repo
+Delay between actions: 1 second
+Strategy: Rapid creation of multiple repositories with extensive malicious code injection. Creates social engineering issues to pressure victims. High visibility but maximum damage potential.
+Target: Systems with weak monitoring
+Detection risk: HIGH
+
+4. TARGETED CAMPAIGN
+--------------------
+Objective: Deep compromise of specific target
+Repositories: 1
+Commits per repo: 8
+Backdoors: 4 per repo
+Delay between actions: 3 seconds
+Strategy: Focuses on single repository with extensive malicious code injection and multiple backdoor types. Designed for specific high-value targets.
+Target: Critical infrastructure or high-value assets
+Detection risk: MEDIUM
+
+5. SPAM CAMPAIGN
+----------------
+Objective: Resource exhaustion and distraction
+Repositories: 10
+Commits per repo: 2
+Backdoors: 1 per repo
+Delay between actions: 0.5 seconds
+Strategy: Rapid creation of many repositories to overwhelm administrators and consume resources. Creates social engineering issues for additional chaos.
+Target: Overload security teams and systems
+Detection risk: VERY HIGH
+
+6. PERSISTENT CAMPAIGN
+-----------------------
+Objective: Long-term access and multiple entry points
+Repositories: 2
+Commits per repo: 5
+Backdoors: 5 per repo
+Delay between actions: 4 seconds
+Strategy: Creates multiple types of backdoors for persistent access. Focuses on maintaining long-term presence even if some backdoors are discovered.
+Target: Long-term espionage or data exfiltration
+Detection risk: MEDIUM-LOW
+
+PAYLOAD TYPES USED:
+===================
+
+Python Payloads:
+- Remote shell execution via curl
+- Subprocess backdoor downloads
+- Socket-based reverse connections
+
+JavaScript Payloads:
+- Cookie theft and exfiltration
+- Token stealing from localStorage
+- Base64 encoded malicious scripts
+
+Bash Payloads:
+- Remote script execution
+- Cron job persistence
+- Netcat reverse shells
+
+SQL Payloads:
+- Table dropping attacks
+- Data exfiltration via UNION
+- Privilege escalation injections
+
+BACKDOOR TYPES:
+===============
+
+1. Reverse Shell (Python)
+   - Connects back to attacker server
+   - Provides shell access to compromised system
+
+2. Keylogger (JavaScript)
+   - Captures user keystrokes
+   - Sends data to attacker server
+
+3. Crypto Miner (Bash)
+   - Downloads and runs cryptocurrency miner
+   - Uses system resources for mining
+
+USAGE EXAMPLES:
+===============
+
+# Run stealth campaign
+CAMPAIGN_TYPE=stealth python3 malicious_gitea_bot.py
+
+# Run aggressive campaign with custom server
+GITEA_URL=http://target-server:3000 CAMPAIGN_TYPE=aggressive python3 malicious_gitea_bot.py
+
+# Run spam campaign with custom credentials
+BOT_USERNAME=evil-bot BOT_PASSWORD=pass123 CAMPAIGN_TYPE=spam python3 malicious_gitea_bot.py
+
+DETECTION INDICATORS:
+====================
+
+Repository Names:
+- Contains "tools", "utils", "security"
+- Random numbers appended
+- Campaign type prefixes
+
+Commit Messages:
+- Generic messages like "Update code", "Fix deployment"
+- Legitimate-sounding but vague descriptions
+
+File Locations:
+- scripts/ directory
+- tools/ directory  
+- vendor/ directory
+- Hidden in common paths
+
+Code Patterns:
+- Base64 encoded content
+- External network connections
+- System command execution
+- Subprocess calls
+
+MITIGATION:
+===========
+
+1. Monitor repository creation patterns
+2. Scan commits for malicious patterns
+3. Block external network connections
+4. Implement code review requirements
+5. Use static analysis tools
+6. Monitor for suspicious file locations
+7. Implement rate limiting
+8. User behavior analysis 

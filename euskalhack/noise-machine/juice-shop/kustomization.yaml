@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+metadata:
+  name: juice-shop
+  namespace: juice-shop
+
+resources:
+- juice-shop-namespace.yaml
+- juice-shop-deployment.yaml
+- juice-shop-service.yaml
+- juice-shop-ingress.yaml
+
+commonLabels:
+  app: juice-shop
+  component: web-application 
